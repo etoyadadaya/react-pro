@@ -1,0 +1,15 @@
+.card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.checkbox {
+  margin-right: 12px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}

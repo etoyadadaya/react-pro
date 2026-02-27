@@ -1,1 +1,1 @@
-export { TasksPage } from './tasksPage';
+export { TaskPage } from './ui/tasksPage';

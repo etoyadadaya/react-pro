@@ -1,14 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { TasksPage } from 'pages/tasks';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<TasksPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
