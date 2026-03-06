@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { Task } from '../model/types';
 import styles from './TaskCard.module.css';
 
@@ -6,7 +7,7 @@ interface TaskCardProps {
   onToggle: (id: string) => void;
 }
 
-export const TaskCard = ({ task, onToggle }: TaskCardProps) => {
+export const TaskCard = memo(({ task, onToggle }: TaskCardProps) => {
   return (
     <div className={styles.card}>
       <input
@@ -21,4 +22,4 @@ export const TaskCard = ({ task, onToggle }: TaskCardProps) => {
       </span>
     </div>
   );
-};
+});
