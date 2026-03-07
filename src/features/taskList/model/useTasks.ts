@@ -1,10 +1,13 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { Task } from 'entities/task/model/types';
+import { useGetTasksQuery } from 'entities/task/api/tasksApi';
 
 export type Filter = 'all' | 'completed' | 'incomplete';
 
-export function useTasks(initial: Task[]) {
-  const [tasks, setTasks] = useState<Task[]>(initial);
+export function useTasks() {
+  const { data } = useGetTasksQuery();
+
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState<Filter>('all');
 
   const filteredTasks = useMemo(() => {
@@ -26,6 +29,12 @@ export function useTasks(initial: Task[]) {
   const removeTask = useCallback((id: string) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   }, []);
+
+  useEffect(() => {
+    if (tasks.length === 0 && data && data.length > ~0) {
+      setTasks(data);
+    }
+  }, [data, tasks.length]);
 
   return {
     tasks: filteredTasks,
