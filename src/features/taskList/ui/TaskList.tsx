@@ -1,17 +1,9 @@
 import { TaskCard } from 'entities/task/ui/TaskCard';
 import { useTasks } from '../model/useTasks';
 import { FilterButton } from 'shared/ui/FilterButton/FilterButton';
-import type { Task } from 'entities/task/model/types';
-
-const initialTasks: Task[] = [
-  { id: '1', title: 'Изучить FSD', completed: false },
-  { id: '2', title: 'Написать код', completed: true },
-  { id: '3', title: 'Сдать задание', completed: false },
-];
 
 export const TaskList = () => {
-  const { tasks, filter, setFilter, toggleTask, removeTask } =
-    useTasks(initialTasks);
+  const { tasks, filter, setFilter, toggleTask, removeTask } = useTasks();
 
   return (
     <div>
