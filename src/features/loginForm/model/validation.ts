@@ -8,7 +8,7 @@ export const loginSchema = yup.object({
     .email('невалидный email адрес!')
     .required('email обязателен для заполнения!'),
 
-  password: yup.string().required('password обязателен для заполнения!'),
+  password: yup.string().required('password обязателен для заполнения!').min(6),
 
   confirm: yup
     .string()
@@ -21,7 +21,7 @@ export const loginSchema = yup.object({
       yup.object({
         url: yup
           .string()
-          .url('link должен быть валидным URL!')
+          .url('Некорректный URL!')
           .required('url обязателен для заполнения!'),
       })
     )
