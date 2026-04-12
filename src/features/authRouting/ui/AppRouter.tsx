@@ -5,6 +5,7 @@ import { ProfilePage } from './ProfilePage';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicPage } from './PublicPage';
 import { AuthProvider } from './AuthProvider';
+import { PortalShowcase } from 'pages/portal-showcase';
 
 export function AppRouter() {
   return (
@@ -13,6 +14,7 @@ export function AppRouter() {
         <Route path="/" element={<Navigate to="/public" replace />} />
         <Route path="/public" element={<PublicPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/portal-showcase" element={<PortalShowcase />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />

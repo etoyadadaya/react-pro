@@ -12,6 +12,9 @@ export function PublicPage() {
         <li>
           <Link to="/profile">Профиль</Link>
         </li>
+        <li>
+          <Link to="/portal-showcase">Portal showcase</Link>
+        </li>
       </ul>
     </main>
   );

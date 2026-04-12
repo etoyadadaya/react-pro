@@ -1,0 +1,67 @@
+.backdrop {
+  all: initial;
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(17, 24, 39, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog {
+  width: min(92vw, 420px);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
+}
+
+.light {
+  background: #ffffff;
+  color: #111827;
+}
+
+.dark {
+  background: #111827;
+  color: #f9fafb;
+  border: 1px solid #4b5563;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.description {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.confirm {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.cancel {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.dark .cancel {
+  background: #374151;
+  color: #f9fafb;
+}
