@@ -1,0 +1,28 @@
+.wrapper {
+  display: inline-flex;
+}
+
+.tooltip {
+  all: initial;
+  position: fixed;
+  z-index: 1000;
+  max-width: 260px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #1f2937;
+  color: #f9fafb;
+  font-size: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+.light {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.dark {
+  background-color: #f9fafb;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}

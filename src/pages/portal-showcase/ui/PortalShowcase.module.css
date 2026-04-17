@@ -1,0 +1,63 @@
+.page {
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.page.light {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.page.dark {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.card {
+  max-width: 720px;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid #d1d5db;
+}
+
+.dark .card {
+  background: rgba(31, 41, 55, 0.8);
+  border-color: #374151;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.delete {
+  background: #dc2626;
+  color: #fff;
+}
+
+.themeSwitch {
+  background: #2563eb;
+  color: #fff;
+}
+
+.counterBox {
+  margin-top: 24px;
+  border-radius: 10px;
+  border: 1px dashed #9ca3af;
+  padding: 12px;
+}
+
+.target {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: help;
+}
