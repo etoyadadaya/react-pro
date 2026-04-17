@@ -14,6 +14,7 @@ export function PublicPage() {
         </li>
         <li>
           <Link to="/react19">Примеры React 19</Link>
+          <Link to="/portal-showcase">Portal showcase</Link>
         </li>
       </ul>
     </main>

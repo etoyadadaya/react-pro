@@ -6,6 +6,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { PublicPage } from './PublicPage';
 import { AuthProvider } from './AuthProvider';
 import { React19ExamplesPage } from 'pages/react19Examples';
+import { PortalShowcase } from 'pages/portal-showcase';
 
 export function AppRouter() {
   return (
@@ -15,6 +16,7 @@ export function AppRouter() {
         <Route path="/public" element={<PublicPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/react19" element={<React19ExamplesPage />} />
+        <Route path="/portal-showcase" element={<PortalShowcase />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/profile" element={<ProfilePage />} />
