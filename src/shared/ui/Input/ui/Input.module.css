@@ -1,0 +1,41 @@
+.input {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 7px 16px;
+	color: #1a1a1a;
+	font: inherit;
+	background: #ffffff;
+	border: 1px solid #cfd8dc;
+	border-radius: 12px;
+	outline: none;
+	caret-color: #feba0c;
+}
+
+.input:focus {
+	border-color: #ffe44d;
+}
+
+.input:disabled {
+	background: #f5f5f5;
+	cursor: not-allowed;
+}
+
+.default {
+	height: 48px;
+	margin: 8px 0;
+}
+
+.search {
+	padding: 13px 60px 13px 20px;
+	border: 1px solid transparent;
+	border-radius: 24px;
+}
+
+.search:focus {
+	background: #ffffff;
+	border-color: #fed700;
+}
+
+.search::placeholder {
+	color: #7b8e98;
+}

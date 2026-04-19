@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as BackSvg } from './../../../assets/icons/back.svg';
+import { Button } from '../../Button';
 
 export const ButtonBack = () => {
 	const navigate = useNavigate();
 	return (
-		<button onClick={() => navigate(-1)}>
+		<Button aria-label='Назад' onClick={() => navigate(-1)} variant='icon'>
 			<BackSvg />
-		</button>
+		</Button>
 	);
 };
