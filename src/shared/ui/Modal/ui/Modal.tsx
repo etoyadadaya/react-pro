@@ -1,11 +1,4 @@
-import {
-	MouseEvent,
-	ReactNode,
-	RefObject,
-	useEffect,
-	useId,
-	useRef,
-} from 'react';
+import { ReactNode, RefObject, useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button } from '../../Button';
 import s from './Modal.module.css';
@@ -34,11 +27,12 @@ export const Modal = ({
 			return;
 		}
 
-		lastFocusedElementRef.current =
+		const focusTarget =
 			triggerRef?.current ??
 			(document.activeElement instanceof HTMLElement
 				? document.activeElement
 				: null);
+		lastFocusedElementRef.current = focusTarget;
 
 		const frameId = window.requestAnimationFrame(() => {
 			closeButtonRef.current?.focus();
@@ -59,7 +53,7 @@ export const Modal = ({
 			window.cancelAnimationFrame(frameId);
 			document.body.style.overflow = previousOverflow;
 			document.removeEventListener('keydown', handleEscapeKeyDown);
-			(triggerRef?.current ?? lastFocusedElementRef.current)?.focus();
+			(focusTarget ?? lastFocusedElementRef.current)?.focus();
 		};
 	}, [isOpen, onClose, triggerRef]);
 
@@ -73,14 +67,14 @@ export const Modal = ({
 		return null;
 	}
 
-	const handleOverlayClick = (event: MouseEvent<HTMLDivElement>) => {
-		if (event.target === event.currentTarget) {
-			onClose();
-		}
-	};
-
 	return createPortal(
-		<div className={s.overlay} onClick={handleOverlayClick}>
+		<div className={s.overlay}>
+			<button
+				aria-label='Закрыть модальное окно'
+				className={s.backdrop}
+				onClick={onClose}
+				type='button'
+			/>
 			<div
 				aria-labelledby={titleId}
 				aria-modal='true'
