@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface CartState {
 	products: CartProduct[];
@@ -34,4 +34,40 @@ export const cartSlice = createSlice({
 });
 
 export const cartActions = { ...cartSlice.actions };
-export const cartSelectors = cartSlice.selectors;
+
+const getCartProducts = cartSlice.selectors.getCartProducts;
+
+const getCartProductsCount = createSelector(getCartProducts, (products) => {
+	return products.length;
+});
+
+const getCartSummary = createSelector(getCartProducts, (products) => {
+	const allPrice = products.reduce((acc, product) => {
+		return acc + product.price * product.count;
+	}, 0);
+
+	const allDiscount = products.reduce((acc, product) => {
+		return acc + product.discount * product.count;
+	}, 0);
+
+	return {
+		allDiscount,
+		allPrice,
+		productsCount: products.length,
+		totalPrice: allPrice - allDiscount,
+	};
+});
+
+const getCartOrder = createSelector(getCartProducts, (products) => {
+	return products.map((product) => ({
+		count: product.count,
+		id: product.id,
+	}));
+});
+
+export const cartSelectors = {
+	...cartSlice.selectors,
+	getCartOrder,
+	getCartProductsCount,
+	getCartSummary,
+};

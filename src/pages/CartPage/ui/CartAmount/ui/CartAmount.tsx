@@ -1,19 +1,16 @@
 import s from '../../CartPage.module.css';
 import classNames from 'classnames';
 import { Button } from '../../../../../shared/ui/Button';
+import { useAppSelector } from '../../../../../shared/store/utils';
+import { cartSelectors } from '../../../../../shared/store/slices/cart';
 
-type CartAmountProps = {
-	products: CartProduct[];
-};
-export const CartAmount = ({ products }: CartAmountProps) => {
-	const allPrice = products.reduce((acc, p) => p.price * p.count + acc, 0);
-	const allDiscount = products.reduce(
-		(acc, p) => p.discount * p.count + acc,
-		0
+export const CartAmount = () => {
+	const { allDiscount, allPrice, productsCount, totalPrice } = useAppSelector(
+		cartSelectors.getCartSummary
 	);
+	const order = useAppSelector(cartSelectors.getCartOrder);
 
 	const handleSubmitCart = () => {
-		const order = products.map((p) => ({ id: p.id, count: p.count }));
 		console.log('Отправка заказа на сервер: ', JSON.stringify(order, null, 2));
 	};
 
@@ -23,7 +20,7 @@ export const CartAmount = ({ products }: CartAmountProps) => {
 			<div className={classNames(s['cart-amount__table'])}>
 				<div className={classNames(s['cart-amount__table-row'])}>
 					<span className={classNames(s['cart-amount__table-title'])}>
-						{`Товары (${products.length})`}
+						{`Товары (${productsCount})`}
 					</span>
 					<span className={classNames(s['cart-amount__table-value'])}>
 						{`${allPrice} ₽`}
@@ -47,7 +44,7 @@ export const CartAmount = ({ products }: CartAmountProps) => {
 					Общая стоимость
 				</h2>
 				<span className={classNames(s['cart-amount__total-cost-value'])}>
-					{`${allPrice - allDiscount} ₽`}
+					{`${totalPrice} ₽`}
 				</span>
 			</div>
 			<Button fullWidth onClick={handleSubmitCart}>

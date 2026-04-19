@@ -6,9 +6,9 @@ import { CartList } from './CartList';
 import { CartAmount } from './CartAmount';
 
 export const CartPage = () => {
-	const products = useAppSelector(cartSelectors.getCartProducts);
+	const productsCount = useAppSelector(cartSelectors.getCartProductsCount);
 
-	if (!products.length) {
+	if (!productsCount) {
 		return <h1 className='header-title'>Товаров нет корзине</h1>;
 	}
 
@@ -16,10 +16,10 @@ export const CartPage = () => {
 		<div className={classNames(s['content'], s['container'])}>
 			<div className={classNames(s['content-cart'])}>
 				<div className={classNames(s['cart-title'])}>
-					<span>{products.length}</span> в корзине
+					<span>{productsCount}</span> в корзине
 				</div>
-				<CartList products={products} />
-				<CartAmount products={products} />
+				<CartList />
+				<CartAmount />
 			</div>
 		</div>
 	);
