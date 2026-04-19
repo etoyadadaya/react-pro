@@ -1,6 +1,5 @@
 import { FC, useEffect, useRef } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import {
 	Avatar,
 	Box,
@@ -17,14 +16,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { userActions } from '../../../shared/store/slices/user';
 import { getMessageFromError } from '../../../shared/utils';
 import { useSignUpMutation } from '../../../shared/store/api/authApi';
+import { useAppDispatch, useAppSelector } from '../../../shared/store/utils';
+import { productsSelectors } from '../../../shared/store/slices/products';
 import { AuthFormValues } from '../model/types';
 import { signUpFormSchema } from '../model/validation';
+import { prefetchProductsAfterAuth } from '../model/prefetchAfterAuth';
 
 export const SignUpForm: FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const [signUpRequestFn] = useSignUpMutation();
 	const emailInputRef = useRef<HTMLInputElement | null>(null);
+	const productsState = useAppSelector(productsSelectors.getProductsState);
 
 	const {
 		control,
@@ -50,9 +53,10 @@ export const SignUpForm: FC = () => {
 			dispatch(
 				userActions.setAccessToken({ accessToken: response.accessToken })
 			);
+			prefetchProductsAfterAuth(dispatch, productsState);
 
 			toast.success('Вы успешно зарегистрированы!');
-			navigate('/');
+			navigate('/', { replace: true });
 		} catch (error) {
 			console.log({ error });
 			toast.error(

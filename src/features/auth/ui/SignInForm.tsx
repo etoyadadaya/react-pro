@@ -13,20 +13,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { toast } from 'react-toastify';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useSignInMutation } from '../../../shared/store/api/authApi';
 import { userActions } from '../../../shared/store/slices/user';
 import { getMessageFromError } from '../../../shared/utils';
+import { useAppDispatch, useAppSelector } from '../../../shared/store/utils';
+import { productsSelectors } from '../../../shared/store/slices/products';
 import { AuthFormValues } from '../model/types';
 import { signInFormSchema } from '../model/validation';
+import { prefetchProductsAfterAuth } from '../model/prefetchAfterAuth';
 
 export const SignInForm: FC = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [signInRequestFn] = useSignInMutation();
 	const emailInputRef = useRef<HTMLInputElement | null>(null);
 	const submitAttemptsRef = useRef(0);
+	const productsState = useAppSelector(productsSelectors.getProductsState);
 
 	const {
 		control,
@@ -55,14 +58,15 @@ export const SignInForm: FC = () => {
 				userActions.setAccessToken({ accessToken: response.accessToken })
 			);
 			submitAttemptsRef.current = 0;
+			prefetchProductsAfterAuth(dispatch, productsState);
 
 			toast.success('Вы успешно авторизованы!');
 
 			if (location.state?.from) {
-				return navigate(location.state.from);
+				return navigate(location.state.from, { replace: true });
 			}
 
-			navigate('/');
+			navigate('/', { replace: true });
 		} catch (error) {
 			const fallbackMessage =
 				submitAttemptsRef.current > 1
