@@ -46,8 +46,16 @@ module.exports = {
 			},
 			{
 				test: /\.svg$/i,
+				resourceQuery: /react/,
 				issuer: /\.[jt]sx?$/,
-				use: ['@svgr/webpack', 'url-loader'],
+				use: ['@svgr/webpack'],
+			},
+			{
+				test: /\.svg$/i,
+				type: 'asset/resource',
+				generator: {
+					filename: 'static/images/[hash][ext][query]',
+				},
 			},
 			{
 				test: /\.css$/,

@@ -9,6 +9,11 @@ module.exports = {
 		react: {
 			version: 'detect',
 		},
+		'import/resolver': {
+			node: {
+				extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.svg'],
+			},
+		},
 	},
 	extends: [
 		'plugin:@typescript-eslint/recommended',
@@ -32,5 +37,18 @@ module.exports = {
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
+		'import/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
 	},
+	overrides: [
+		{
+			files: ['vite.config.mjs'],
+			rules: {
+				'import/no-unresolved': 'off',
+				'import/namespace': 'off',
+				'import/default': 'off',
+				'import/no-named-as-default': 'off',
+				'import/no-named-as-default-member': 'off',
+			},
+		},
+	],
 };

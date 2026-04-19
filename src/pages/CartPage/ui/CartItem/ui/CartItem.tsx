@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ReactComponent as TrashIcon } from '../../../../../shared/assets/icons/trash.svg';
+import TrashIcon from '../../../../../shared/assets/icons/trash.svg?react';
 import { Link } from 'react-router-dom';
 import s from '../../CartPage.module.css';
 import classNames from 'classnames';

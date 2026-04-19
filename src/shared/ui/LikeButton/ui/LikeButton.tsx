@@ -1,6 +1,6 @@
 import { memo, startTransition, useOptimistic, useTransition } from 'react';
 import s from './LikeButton.module.css';
-import { ReactComponent as LikeSvg } from './../../../assets/icons/like.svg';
+import LikeSvg from './../../../assets/icons/like.svg?react';
 import classNames from 'classnames';
 import { useAppSelector } from '../../../store/utils';
 import { userSelectors } from '../../../store/slices/user';
