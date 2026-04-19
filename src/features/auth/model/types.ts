@@ -1,4 +1,4 @@
-export interface SignUpFormValues {
+export interface AuthFormValues {
 	email: string;
 	password: string;
 }
