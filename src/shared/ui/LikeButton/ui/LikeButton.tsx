@@ -1,4 +1,4 @@
-import { startTransition, useOptimistic, useTransition } from 'react';
+import { memo, startTransition, useOptimistic, useTransition } from 'react';
 import s from './LikeButton.module.css';
 import { ReactComponent as LikeSvg } from './../../../assets/icons/like.svg';
 import classNames from 'classnames';
@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 type TLikeButtonProps = {
 	product: Product;
 };
-export const LikeButton = ({ product }: TLikeButtonProps) => {
+export const LikeButton = memo(({ product }: TLikeButtonProps) => {
 	const accessToken = useAppSelector(userSelectors.getAccessToken);
 	const user = useAppSelector(userSelectors.getUser);
 	const [isPending, startLikeTransition] = useTransition();
@@ -64,4 +64,6 @@ export const LikeButton = ({ product }: TLikeButtonProps) => {
 			<LikeSvg />
 		</button>
 	);
-};
+});
+
+LikeButton.displayName = 'LikeButton';

@@ -8,8 +8,9 @@ const MAX_COUNT = 99;
 
 export const useCount = (productId: string) => {
 	const dispatch = useDispatch();
-	const products = useAppSelector(cartSelectors.getCartProducts);
-	const product = products.find((p) => p.id === productId) as CartProduct;
+	const product = useAppSelector((state) =>
+		cartSelectors.getCartProducts(state).find((item) => item.id === productId)
+	) as CartProduct;
 
 	const { id, count, stock } = product;
 	const handleIncrement = () => {

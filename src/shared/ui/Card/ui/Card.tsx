@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import classNames from 'classnames';
 import s from './Card.module.css';
 import { Price } from './Price/ui/Price';
@@ -11,10 +12,13 @@ import { CartCounter } from '../../../../features/cart';
 type CardProps = {
 	product: Product;
 };
-export const Card = ({ product }: CardProps) => {
+export const Card = memo(({ product }: CardProps) => {
 	const { discount, price, name, tags, id, images } = product;
-	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
-	const isProductInCart = cartProducts.some((p) => p.id === id);
+	const isProductInCart = useAppSelector((state) =>
+		cartSelectors.getCartProducts(state).some((productFromCart) => {
+			return productFromCart.id === id;
+		})
+	);
 	const { addProductToCart } = useAddToCart();
 
 	return (
@@ -67,4 +71,6 @@ export const Card = ({ product }: CardProps) => {
 			)}
 		</article>
 	);
-};
+});
+
+Card.displayName = 'Card';

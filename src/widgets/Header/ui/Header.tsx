@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import classNames from 'classnames';
 import s from './Header.module.css';
 import { Logo } from '../../../shared/ui/Logo';
@@ -12,11 +13,12 @@ import { cartSelectors } from '../../../shared/store/slices/cart';
 export const Header = () => {
 	const { products } = useProducts();
 	const user = useAppSelector(userSelectors.getUser);
-	const cartProducts = useAppSelector(cartSelectors.getCartProducts);
+	const cartProductsCount = useAppSelector(cartSelectors.getCartProductsCount);
 
-	const likeCount = products.filter((product) =>
-		isLiked(product.likes, user?.id)
-	).length;
+	const likeCount = useMemo(() => {
+		return products.filter((product) => isLiked(product.likes, user?.id))
+			.length;
+	}, [products, user?.id]);
 
 	const accessToken = useAppSelector(userSelectors.getAccessToken);
 
@@ -53,7 +55,7 @@ export const Header = () => {
 								fill='#1A1A1A'></path>
 						</svg>
 						<span className={s['header__icon-bubble']}>
-							{cartProducts.length}
+							{cartProductsCount}
 						</span>
 					</Link>
 					{accessToken && (
