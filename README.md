@@ -113,8 +113,14 @@
 - Убедиться, что фокус при открытии страницы сразу стоит в поле email.
 - При повторных ошибках входа счетчик попыток меняется через ref без отдельного состояния компонента.
 
-TODO:
+### Portal-модалка
 
-- скриншот или gif модалки через Portal
-- gif или скриншот optimistic UI для лайка
-- скриншот React DevTools Profiler с оптимизацией рендеров
+![Portal modal](./docs/demo/modal-portal.png)
+
+### Optimistic UI
+
+![Optimistic like](./docs/demo/optimistic-like.png)
+
+### Profiler
+
+![Profiler cart update](./docs/demo/profiler-cart-update.png)
