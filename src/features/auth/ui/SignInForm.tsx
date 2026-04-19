@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import {
 	Avatar,
 	Box,
@@ -25,6 +25,8 @@ export const SignInForm: FC = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [signInRequestFn] = useSignInMutation();
+	const emailInputRef = useRef<HTMLInputElement | null>(null);
+	const submitAttemptsRef = useRef(0);
 
 	const {
 		control,
@@ -38,7 +40,13 @@ export const SignInForm: FC = () => {
 		resolver: yupResolver(signInFormSchema),
 	});
 
+	useEffect(() => {
+		emailInputRef.current?.focus();
+	}, []);
+
 	const submitHandler: SubmitHandler<AuthFormValues> = async (values) => {
+		submitAttemptsRef.current += 1;
+
 		try {
 			const response = await signInRequestFn(values).unwrap();
 
@@ -46,6 +54,7 @@ export const SignInForm: FC = () => {
 			dispatch(
 				userActions.setAccessToken({ accessToken: response.accessToken })
 			);
+			submitAttemptsRef.current = 0;
 
 			toast.success('Вы успешно авторизованы!');
 
@@ -55,12 +64,12 @@ export const SignInForm: FC = () => {
 
 			navigate('/');
 		} catch (error) {
-			toast.error(
-				getMessageFromError(
-					error,
-					'Не известная ошибка при авторизации пользователя'
-				)
-			);
+			const fallbackMessage =
+				submitAttemptsRef.current > 1
+					? `Не известная ошибка при авторизации пользователя. Попытка ${submitAttemptsRef.current}.`
+					: 'Не известная ошибка при авторизации пользователя';
+
+			toast.error(getMessageFromError(error, fallbackMessage));
 		}
 	};
 
@@ -87,19 +96,27 @@ export const SignInForm: FC = () => {
 					<Controller
 						name='email'
 						control={control}
-						render={({ field }) => (
-							<TextField
-								margin='normal'
-								label='Email Address'
-								type='email'
-								fullWidth
-								required
-								autoComplete='email'
-								error={!!errors.email?.message}
-								helperText={errors.email?.message}
-								{...field}
-							/>
-						)}
+						render={({ field }) => {
+							const { ref, ...fieldProps } = field;
+
+							return (
+								<TextField
+									margin='normal'
+									label='Email Address'
+									type='email'
+									fullWidth
+									required
+									autoComplete='email'
+									error={!!errors.email?.message}
+									helperText={errors.email?.message}
+									inputRef={(element) => {
+										ref(element);
+										emailInputRef.current = element;
+									}}
+									{...fieldProps}
+								/>
+							);
+						}}
 					/>
 					<Controller
 						name='password'

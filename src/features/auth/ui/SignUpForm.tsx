@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {
@@ -24,6 +24,7 @@ export const SignUpForm: FC = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [signUpRequestFn] = useSignUpMutation();
+	const emailInputRef = useRef<HTMLInputElement | null>(null);
 
 	const {
 		control,
@@ -36,6 +37,10 @@ export const SignUpForm: FC = () => {
 		},
 		resolver: yupResolver(signUpFormSchema),
 	});
+
+	useEffect(() => {
+		emailInputRef.current?.focus();
+	}, []);
 
 	const submitHandler: SubmitHandler<AuthFormValues> = async (values) => {
 		try {
@@ -82,19 +87,27 @@ export const SignUpForm: FC = () => {
 					<Controller
 						name='email'
 						control={control}
-						render={({ field }) => (
-							<TextField
-								margin='normal'
-								label='Email Address'
-								type='email'
-								fullWidth
-								required
-								autoComplete='email'
-								error={!!errors.email?.message}
-								helperText={errors.email?.message}
-								{...field}
-							/>
-						)}
+						render={({ field }) => {
+							const { ref, ...fieldProps } = field;
+
+							return (
+								<TextField
+									margin='normal'
+									label='Email Address'
+									type='email'
+									fullWidth
+									required
+									autoComplete='email'
+									error={!!errors.email?.message}
+									helperText={errors.email?.message}
+									inputRef={(element) => {
+										ref(element);
+										emailInputRef.current = element;
+									}}
+									{...fieldProps}
+								/>
+							);
+						}}
 					/>
 					<Controller
 						name='password'
