@@ -4,6 +4,7 @@
 	background: none;
 	border: none;
 	cursor: pointer;
+	transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .card__favorite svg {
@@ -20,4 +21,9 @@
 
 .card__favorite_is-active svg path:first-child {
 	fill: #f44336;
+}
+
+.card__favorite_is-pending {
+	transform: scale(0.94);
+	opacity: 0.75;
 }
