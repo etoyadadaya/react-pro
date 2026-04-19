@@ -1,0 +1,104 @@
+.description {
+	margin: 0;
+	color: #4d5c67;
+	font-size: 15px;
+	line-height: 22px;
+}
+
+.summary {
+	display: grid;
+	gap: 12px;
+	padding: 16px;
+	background: #f7f8fa;
+	border-radius: 18px;
+}
+
+.summaryRow {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	color: #1a1a1a;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.discount {
+	color: #f44336;
+}
+
+.totalLabel {
+	font-weight: 800;
+}
+
+.totalValue {
+	font-weight: 800;
+	font-size: 18px;
+}
+
+.items {
+	display: grid;
+	gap: 12px;
+}
+
+.itemsTitle {
+	margin: 0;
+	font-size: 18px;
+	line-height: 22px;
+}
+
+.list {
+	display: grid;
+	gap: 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #eceff1;
+}
+
+.item:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.itemInfo {
+	display: grid;
+	gap: 4px;
+}
+
+.itemName {
+	font-weight: 700;
+	line-height: 20px;
+}
+
+.itemCount {
+	color: #7b8e98;
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.itemPrice {
+	flex-shrink: 0;
+	font-weight: 700;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 12px;
+}
+
+@media (width <= 640px) {
+	.actions {
+		display: grid;
+	}
+}
