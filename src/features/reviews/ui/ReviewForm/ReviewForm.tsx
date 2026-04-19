@@ -1,8 +1,8 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import classNames from 'classnames';
-import s from './ReviewForm.module.css';
-import { Rating } from '../../../../shared/ui/Rating';
 import { Button } from '../../../../shared/ui/Button';
+import { Rating } from '../../../../shared/ui/Rating';
+import s from './ReviewForm.module.css';
 
 export const ReviewForm = () => {
 	const [reviewText, setReviewText] = useState('');

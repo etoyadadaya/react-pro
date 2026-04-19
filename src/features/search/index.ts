@@ -1,2 +1,2 @@
-export { Search } from '../../shared/ui/Search/ui/Search';
-export { Sort } from '../../shared/ui/Sort';
+export { Search } from './ui/Search/Search';
+export { Sort } from './ui/Sort/Sort';
