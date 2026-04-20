@@ -79,6 +79,14 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'], //указываем файлы с которыми будет работать webpack
+		alias: {
+			'@': path.resolve(__dirname, '..', 'src'),
+			'@app': path.resolve(__dirname, '..', 'src/app'),
+			'@pages': path.resolve(__dirname, '..', 'src/pages'),
+			'@features': path.resolve(__dirname, '..', 'src/features'),
+			'@widgets': path.resolve(__dirname, '..', 'src/widgets'),
+			'@shared': path.resolve(__dirname, '..', 'src/shared'),
+		},
 	},
 	plugins: [
 		new HTMLWebpackPlugins({

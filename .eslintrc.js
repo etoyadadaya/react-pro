@@ -37,7 +37,20 @@ module.exports = {
 		'react/jsx-uses-react': 'off',
 		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
-		'import/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
+		'import/no-unresolved': [
+			'error',
+			{
+				ignore: [
+					'\\.svg\\?react$',
+					'^@/',
+					'^@app/',
+					'^@pages/',
+					'^@features/',
+					'^@widgets/',
+					'^@shared/',
+				],
+			},
+		],
 	},
 	overrides: [
 		{
