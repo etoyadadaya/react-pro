@@ -52,6 +52,7 @@ module.exports = {
 			},
 			{
 				test: /\.svg$/i,
+				resourceQuery: { not: [/react/] },
 				type: 'asset/resource',
 				generator: {
 					filename: 'static/images/[hash][ext][query]',
